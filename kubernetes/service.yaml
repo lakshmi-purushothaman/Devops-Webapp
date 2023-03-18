@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: python-web
-  type: NodePort
+  type: LoadBalancer
   ports:
   - protocol: TCP
     port: 80

@@ -19,6 +19,7 @@ spec:
       containers:
       - name: python-web-container
         image: lakshmips/devops-python-web-app:latest
+        imagePullPolicy: always
         ports:
           - containerPort: 8080
         resources: {}
