@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: python-web
-  namespace: python-web
+  namespace: python-web-app
 spec:
   selector:
     app: python-web
