@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: python-web
-  namespace: python-web
+  namespace: python-web-app
   labels:
     app: python-web
 spec:
