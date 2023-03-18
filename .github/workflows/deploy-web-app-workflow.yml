@@ -1,0 +1,46 @@
+name: Deploy to production
+
+on:
+  push:
+    branches: [ release ]
+
+jobs:
+  deploy-web-app:
+    name: "Deploy Web App"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'eu-west-2'
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Install kubectl
+      id: install-kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.21.3'
+      
+    - name: Publish to Docker Hub
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      uses: docker/build-push-action@v1
+      with: 
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: lakshmips/devops-python-web-app
+        tags: latest, ${{ github.run_number }}
+
+    - name: Update kube config
+      run: aws eks update-kubeconfig --name kong-ta2-eks --region eu-west-1
+
+    - name: Deploy image to Amazon EKS
+      run: |
+        kubectl apply -f kubernetes/namespace.yaml
+        kubectl apply -f kubernetes/deployment.yaml
+        kubectl apply -f kubernetes/service.yaml
+        kubectl apply -f kubernetes/ingress.yaml

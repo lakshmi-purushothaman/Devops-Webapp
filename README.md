@@ -1,2 +1,3 @@
-# Devops-Webapp
-Simple Python Web application to demonstrate kong routing
+## Simple Flask Web App
+
+This is the source code for the tutorial on https://www.learnaws.org/.
