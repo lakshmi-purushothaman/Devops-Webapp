@@ -2,7 +2,7 @@ name: Deploy to production
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   deploy-web-app:
@@ -27,7 +27,7 @@ jobs:
         version: 'v1.21.3'
       
     - name: Publish to Docker Hub
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: docker/build-push-action@v1
       with: 
         username: ${{ secrets.DOCKER_USERNAME }}
