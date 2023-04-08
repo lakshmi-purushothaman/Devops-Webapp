@@ -17,5 +17,5 @@ def test_index():
 
 def test_index_200(app_inst):
     client = app_inst.test_client()
-    response = client.post("/")
+    response = client.get("/")
     assert response.status_code == 200

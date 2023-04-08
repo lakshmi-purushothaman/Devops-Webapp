@@ -25,7 +25,11 @@ jobs:
       uses: azure/setup-kubectl@v1
       with:
         version: 'v1.21.3'
-      
+    - name: Run the unit and integration tests
+      working-directory: .
+      run: | 
+        docker build --target test --tag python-web-app:test .
+        docker run python-web-app:test 
     - name: Publish to Docker Hub
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: docker/build-push-action@v1
