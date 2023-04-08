@@ -19,3 +19,13 @@ def test_index_200(app_inst):
     client = app_inst.test_client()
     response = client.get("/")
     assert response.status_code == 200
+
+def test_index_405(app_inst):
+    client = app_inst.test_client()
+    response = client.post("/")
+    assert response.status_code == 405
+
+def test_index_endpoint(app_inst):
+    client = app_inst.test_client()
+    response = client.get("/")
+    assert b'Hello, World!' in response.data
