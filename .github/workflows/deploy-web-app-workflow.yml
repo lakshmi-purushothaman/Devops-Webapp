@@ -29,7 +29,10 @@ jobs:
       working-directory: .
       run: | 
         docker build --target test --tag python-web-app:test .
-        docker run python-web-app:test 
+        docker run python-web-app:test
+    - name: Build the application
+      run: |
+        docker build --target development --tag lakshmips/devops-python-web-app . 
     - name: Publish to Docker Hub
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: docker/build-push-action@v1

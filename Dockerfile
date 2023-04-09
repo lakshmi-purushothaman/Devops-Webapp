@@ -10,9 +10,9 @@ COPY . /app
 
 EXPOSE 8080
 
+FROM parent as development
 ENTRYPOINT ["python"]
 CMD ["run.py"]
 
 FROM parent as test
-
 ENTRYPOINT ["pytest"]
