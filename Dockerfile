@@ -15,5 +15,4 @@ ENTRYPOINT ["python"]
 CMD ["run.py"]
 
 FROM parent as test
-ENTRYPOINT ["pytest", "python"]
-CMD ["run.py"]
+ENTRYPOINT ["pytest"]
