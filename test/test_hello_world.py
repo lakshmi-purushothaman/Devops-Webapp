@@ -13,7 +13,7 @@ def app_inst():
 
 def test_index():
     index_str = index()
-    assert index_str == "Hello, World!"
+    assert index_str == "Hello, This is for EPA assessment"
 
 def test_index_200(app_inst):
     client = app_inst.test_client()
@@ -28,4 +28,4 @@ def test_index_405(app_inst):
 def test_index_endpoint(app_inst):
     client = app_inst.test_client()
     response = client.get("/")
-    assert b'Hello, World!' in response.data
+    assert b'Hello, This is for EPA assessment' in response.data
